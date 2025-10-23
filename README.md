@@ -1,71 +1,104 @@
-# i18n-csv README
 
-This is the README for your extension "i18n-csv". After writing up a brief description, we recommend including the following sections.
+# i18n-csv 扩展
 
-## Features
+一个为 VS Code 开发的国际化 CSV 文件辅助工具，帮助开发者在代码中快速查看和管理多语言翻译。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 功能特性
 
-For example if there is an image subfolder under your extension project workspace:
+- **实时翻译预览**：将鼠标悬停在代码中的 `t('key')` 函数调用上，即时显示对应键的所有语言翻译
+- **表格化展示**：以表格形式清晰展示多语言翻译内容，支持不同大小写的键列识别
+- **灵活的配置**：可通过 VS Code 设置界面自定义 CSV 文件路径
+- **自动重载**：CSV 文件变更时自动重新加载翻译数据
+- **手动刷新**：提供命令手动刷新翻译数据
+- **配置热更新**：修改配置后自动应用新设置
+- **支持参数化调用**：兼容 `t('key', [params])` 格式的带参数翻译调用
 
-\!\[feature X\]\(images/feature-x.png\)
+## 安装方法
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. 在 VS Code 中打开**扩展**面板（快捷键 `Ctrl+Shift+X` 或 `Cmd+Shift+X`）
+2. 搜索 "i18n-csv"
+3. 点击**安装**按钮
+4. 安装完成后点击**启用**按钮
 
-## Requirements
+或者直接从 [Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode) 下载安装。
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 使用方法
 
-## Extension Settings
+### 基本使用
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1. 确保您的项目中存在包含多语言翻译的 CSV 文件
+2. 默认情况下，扩展会查找工作区根目录下的 `public/lang.csv` 文件
+3. 在代码中编写 `t('key')` 形式的翻译调用
+4. 将鼠标悬停在翻译调用上，即可看到所有语言的翻译内容
 
-For example:
+### CSV 文件格式
 
-This extension contributes the following settings:
+您的 CSV 文件需要包含一个键列（大小写不敏感：'key'、'Key' 或 'KEY' 都可以），以及各个语言的列：
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```csv
+key,en,zh
+welcome,Welcome,欢迎
+hello,Hello,你好
+```
 
-## Known Issues
+### 自定义 CSV 文件路径
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. 打开 VS Code 设置（快捷键 `Ctrl+,` 或 `Cmd+,`）
+2. 在搜索框中输入 "i18n-csv"
+3. 找到 "I18n Csv: Csv Path" 设置项
+4. 输入您的 CSV 文件路径（相对于工作区根目录）
+5. 保存设置后，扩展会自动加载新路径下的翻译文件
 
-## Release Notes
+## 命令
 
-Users appreciate release notes as you update your extension.
+扩展提供了以下命令（可通过 `Ctrl+Shift+P` 或 `Cmd+Shift+P` 打开命令面板并输入）：
 
-### 1.0.0
+- **i18n-csv.reloadTranslations**：手动刷新翻译数据
 
-Initial release of ...
+## 配置选项
 
-### 1.0.1
+| 配置项 | 类型 | 默认值 | 描述 |
+|--------|------|--------|------|
+| `i18n-csv.csvPath` | string | `public/lang.csv` | 相对于工作区根目录的 CSV 翻译文件路径 |
 
-Fixed issue #.
+## 支持的文件类型
 
-### 1.1.0
+扩展目前支持在以下文件类型中显示翻译提示：
 
-Added features X, Y, and Z.
+- TypeScript (.ts)
+- JavaScript (.js)
+- Vue (.vue)
+- HTML (.html)
 
----
+## 常见问题
 
-## Following extension guidelines
+### Q: 为什么我看不到翻译提示？
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+A: 请检查以下几点：
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+1. CSV 文件路径是否正确配置
+2. CSV 文件格式是否符合要求，特别是是否包含键列
+3. 代码中的翻译调用格式是否为 `t('key')` 或 `t('key', [params])`
+4. 尝试使用命令面板执行 `i18n-csv.reloadTranslations` 命令
 
-## Working with Markdown
+### Q: 如何支持其他文件类型？
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+A: 目前扩展默认支持 TypeScript、JavaScript、Vue 和 HTML 文件。如需支持其他文件类型，请在 GitHub 上提交功能请求。
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+### Q: 扩展支持 CSV 文件中的嵌套参数吗？
 
-## For more information
+A: 是的，扩展支持 `t('key', [param1, param2])` 格式的带参数翻译调用。
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## 贡献指南
 
-**Enjoy!**
+如果您发现了 bug 或有新功能的建议，请在 [GitHub 仓库](https://github.com/your-username/i18n-csv) 上提交 issue 或 pull request。
+
+## 更新日志
+
+### v0.0.1
+
+- 初始版本发布
+- 支持基本的翻译预览功能
+- 支持自定义 CSV 文件路径
+- 支持配置热更新
+- 支持参数化翻译调用
