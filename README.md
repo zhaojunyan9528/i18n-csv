@@ -91,7 +91,7 @@ A: 是的，扩展支持 `t('key', [param1, param2])` 格式的带参数翻译�
 
 ## 贡献指南
 
-如果您发现了 bug 或有新功能的建议，请在 [GitHub 仓库](https://github.com/your-username/i18n-csv) 上提交 issue 或 pull request。
+如果您发现了 bug 或有新功能的建议，请在 [GitHub 仓库](https://github.com/zhaojunyan9528/i18n-csv.git) 上提交 issue 或 pull request。
 
 ## 更新日志
 
